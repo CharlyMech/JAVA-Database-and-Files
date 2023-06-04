@@ -31,7 +31,7 @@ public class Conn {
 				System.out.println("No driver detected! " + exc);
 			}
 			// The info about the DataBase (ip, Schema, user, passwd) could be set as an attribute and concatenate a full string
-			Conn.conn = DriverManager.getConnection("jdbc:mysql://192.168.56.100:3306/Library", "library", "library");
+			Conn.conn = DriverManager.getConnection("jdbc:mysql://[SERVER_IP]:3306/Database", "user", "passwd");
 		} catch (java.sql.SQLException sqle) {
 			System.out.println("ERROR: " + sqle);
 		}
