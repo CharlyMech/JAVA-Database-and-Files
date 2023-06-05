@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -45,7 +47,7 @@ public class App {
                     App.option2();
                     break;
                 case 3:
-                    // App.option3();
+                    App.option3();
                     break;
                 case 4:
                     // App.optative();
@@ -214,11 +216,15 @@ public class App {
     }
 
     // Option  3 - buffer Stream
-    public static void option3() {
+    public static void option3() throws IOException {
         // Flag for the menu
         boolean flag3 = true;
+        // String variable to store the prettify text
+        String text = "";
 
-        System.out.println("- Read & write File with buffer Streams -");
+        // BufferedWriter bw = new BufferedWriter(new FileWriter("files/output_bufferedStream.txt"));
+
+        System.out.println("- Read & write File with buffered Streams -");
         // MENU -
         while (flag3) {
             System.out.println("Select one of these options:");
@@ -237,13 +243,40 @@ public class App {
 
             switch (inputInt) {
                 case 1:
-                    System.out.println("READ FILE");
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader("files/input.txt"));
+
+                        String s;
+                        while ((s = br.readLine()) != null) {
+                            text += s;
+                        }
+
+                        br.close();
+                        text = App.prettifytext(text);
+                        System.out.println(text);
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                     break;
                 case 2:
-                    System.out.println("WRITE FILE");
+                    if (text.equals("")) {
+                        System.out.println("Please first read the file");
+                        break;
+                    } else {
+                        try (BufferedWriter bw = new BufferedWriter(
+                                new FileWriter("files/output_bufferedStream.txt"));) {
+                            bw.write(text);
+
+                            System.out.println("File created successfully");
+                            bw.close();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }
                     break;
                 case 3:
                     System.out.println("BYE BYE");
+                    // bw.close();
                     flag3 = false;
                     break;
             }
