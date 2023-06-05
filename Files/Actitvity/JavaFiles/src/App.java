@@ -51,6 +51,7 @@ public class App {
                     break;
                 case 4:
                     // App.optative();
+                    System.out.println("Not available");
                     break;
                 case 5:
                     System.out.println("BYE BYE");
@@ -82,37 +83,38 @@ public class App {
             System.out.print("INPUT: ");
             String input = App.s.next();
 
-            int inputInt = 0;
+            // Check if the user input is a integer value
+            int inputInt = 0; // Default value
             try {
-                inputInt = Integer.parseInt(input);
+                inputInt = Integer.parseInt(input); // Parse from String to Integer/int
             } catch (NumberFormatException e) {
                 System.out.println("The input must be a number (Integer)");
             }
 
             switch (inputInt) {
                 case 1:
-                    try (FileInputStream fin = new FileInputStream("files/input.txt")) {
-                        int i;
-                        do {
-                            i = fin.read();
-                            if (i != -1) {
-                                text += (char) i;
+                    try (FileInputStream fin = new FileInputStream("files/input.txt")) { // Create InputStream inside the Try-Catch block
+                        int i; // This variable will store the ascii/unicode character code of every character in the read file
+                        do { // Loop through all char
+                            i = fin.read(); // Store the character code
+                            if (i != -1) { // If there is file to read
+                                text += (char) i; // Cast the unicode code to a char value and concatenate to the string
                             }
-                        } while (i != -1);
+                        } while (i != -1); // When the iterator (character code) is -1 means that the file has ended
                     } catch (IOException ioe) {
                         System.out.println("READ FILE OPT 1 ERROR " + ioe);
                     }
-                    text = App.prettifytext(text);
-                    System.out.println(text);
+                    text = App.prettifytext(text); // Prettify the text
+                    System.out.println(text); // Show the prettified text
                     break;
                 case 2:
-                    if (text.equals("")) {
+                    if (text.equals("")) { // Check if the text is empty
                         System.out.println("Please first read the file");
                         break;
-                    } else {
-                        try (FileOutputStream fos = new FileOutputStream("files/output_byteStream.txt")) {
-                            byte[] bytes = text.getBytes();
-                            fos.write(bytes);
+                    } else { // Text has been prettified
+                        try (FileOutputStream fos = new FileOutputStream("files/output_byteStream.txt")) { // Create FileOutputStream to write the String content
+                            byte[] bytes = text.getBytes(); // Get bytes list from String
+                            fos.write(bytes); // Write content
                             System.out.println("File created successfully");
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -152,9 +154,10 @@ public class App {
             System.out.print("INPUT: ");
             String input = App.s.next();
 
-            int inputInt = 0;
+            // Check if the user input is a integer value
+            int inputInt = 0; // Default value
             try {
-                inputInt = Integer.parseInt(input);
+                inputInt = Integer.parseInt(input); // Parse from String to Integer/int
             } catch (NumberFormatException e) {
                 System.out.println("The input must be a number (Integer)");
             }
@@ -162,42 +165,42 @@ public class App {
             switch (inputInt) {
                 case 1:
                     try {
-                        FileReader reader = new FileReader("files/input.txt");
-                        int data = reader.read();
+                        FileReader reader = new FileReader("files/input.txt"); // Create FileReader
+                        int data = reader.read(); // Read data from file -> Again this stores the unicode/ascii character code
 
-                        while (data != -1) {
-                            text += (char) data;
-                            data = reader.read();
+                        while (data != -1) { // If data == -1 means that file has ended
+                            text += (char) data; // Concatenate the character to the String variable
+                            data = reader.read(); // This line allows to read the next character until it ends
                         }
 
-                        reader.close();
-                        text = App.prettifytext(text);
-                        System.out.println(text);
+                        reader.close(); // Close reader
+                        text = App.prettifytext(text); // Prettify text
+                        System.out.println(text); // Show text
                     } catch (Exception e) {
                         System.out.println(e);
                     }
                     break;
                 case 2:
-                    if (text.equals("")) {
+                    if (text.equals("")) { // Check if the text is empty
                         System.out.println("Please first read the file");
                         break;
-                    } else {
+                    } else { // Text has been prettified
                         try {
-                            writer.write(text);
-
+                            writer.write(text); // Write String content in the file 
+                            // ? (notice that since writer is defined at the begining, the file is created at first)
                             System.out.println("File created successfully");
                         } catch (Exception e) {
                             System.out.println(e);
                         }
                     }
                     break;
-                case 3:
+                case 3: // FileWriter allows to append content
                     System.out.print("Insert the text you want to add to the file: ");
-                    String appendInput = s.next();
-                    appendInput = "\n" + appendInput;
+                    String appendInput = s.next(); // Read user input -> Remember that Scanner only allows to read one single word
+                    appendInput = "\n" + appendInput; // Add a line break
 
                     try {
-                        writer.append(appendInput);
+                        writer.append(appendInput); // Append new content
 
                         System.out.println("Append successful!");
                     } catch (Exception e) {
@@ -222,8 +225,6 @@ public class App {
         // String variable to store the prettify text
         String text = "";
 
-        // BufferedWriter bw = new BufferedWriter(new FileWriter("files/output_bufferedStream.txt"));
-
         System.out.println("- Read & write File with buffered Streams -");
         // MENU -
         while (flag3) {
@@ -234,9 +235,10 @@ public class App {
             System.out.print("INPUT: ");
             String input = App.s.next();
 
-            int inputInt = 0;
+            // Check if the user input is a integer value
+            int inputInt = 0; // Default value
             try {
-                inputInt = Integer.parseInt(input);
+                inputInt = Integer.parseInt(input); // Parse from String to Integer/int
             } catch (NumberFormatException e) {
                 System.out.println("The input must be a number (Integer)");
             }
@@ -244,31 +246,31 @@ public class App {
             switch (inputInt) {
                 case 1:
                     try {
-                        BufferedReader br = new BufferedReader(new FileReader("files/input.txt"));
+                        BufferedReader br = new BufferedReader(new FileReader("files/input.txt")); // Create BufferedReader
 
-                        String s;
-                        while ((s = br.readLine()) != null) {
-                            text += s;
+                        String s; // This variable will store every character one by one, but this time as a String datatype
+                        while ((s = br.readLine()) != null) { // If s == null means that file has ended
+                            text += s; // Concatenate s values to String variable
                         }
 
-                        br.close();
-                        text = App.prettifytext(text);
-                        System.out.println(text);
+                        br.close(); // Close Reader
+                        text = App.prettifytext(text); // Prettify text
+                        System.out.println(text); // Show prettified text
                     } catch (Exception e) {
                         System.out.println(e);
                     }
                     break;
                 case 2:
-                    if (text.equals("")) {
+                    if (text.equals("")) { // Check if the text is empty
                         System.out.println("Please first read the file");
                         break;
-                    } else {
-                        try (BufferedWriter bw = new BufferedWriter(
+                    } else { // Text has been prettified
+                        try (BufferedWriter bw = new BufferedWriter( // Create the BufferedReader inside the Try-Catch block
                                 new FileWriter("files/output_bufferedStream.txt"));) {
-                            bw.write(text);
+                            bw.write(text); // Write String variable content
 
                             System.out.println("File created successfully");
-                            bw.close();
+                            bw.close(); // Close writer
                         } catch (Exception e) {
                             System.out.println(e);
                         }
@@ -276,7 +278,6 @@ public class App {
                     break;
                 case 3:
                     System.out.println("BYE BYE");
-                    // bw.close();
                     flag3 = false;
                     break;
             }
@@ -285,7 +286,7 @@ public class App {
     }
 
     // Option  4
-    public static void optative() {
+    public static void optative() { // ! NOT DONE FOR NOW
         // Flag for the menu
         boolean flago = true;
 
@@ -324,17 +325,25 @@ public class App {
 
     // Method to create the output text (prettify)
     public static String prettifytext(String input) {
+        /*
+            This method has the only purpose to take a string (in all cases the raw input.txt) and transform it to the desired look
+            showed in the activity statement
+        
+            There are 2 important thinks to say:
+                - '{' delimiter in the original file has been replaced for ';' because it seems that you cannot use the split() method with this symbol
+                - The second Film's title is OFF, I tried to solve that line break but I wasn't able 
+        */
         // Returning String
         String pretty = "--------------------------------------\n\n" +
                 "\tCartelera de Cine"
                 + "\n\n--------------------------------------\n\n";
 
         // Split Films
-        String[] films = input.split(";");
+        String[] films = input.split(";"); // Split films
 
         // Loop over all films in input String[] list
         for (String f : films) {
-            String[] film = f.split("#");
+            String[] film = f.split("#"); // Split film information
             String title = film[0];
             title.replace("\n", " "); // Just in case
             String year = film[1]; // Leave it as a String because there's no need to make calculations, only string concatenation
