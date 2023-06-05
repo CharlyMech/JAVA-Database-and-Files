@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
+    public static Scanner s;
+
     public static void main(String[] args) throws Exception {
         // Create Scanner for user CLI input
-        Scanner s = new Scanner(System.in);
+        App.s = new Scanner(System.in);
         // Boolean variable for while menu loop
         boolean flag = true;
 
@@ -24,7 +26,7 @@ public class App {
             System.out.println("\t4) OPTATIVE");
             System.out.println("\t5) Exit");
             System.out.print("INPUT: ");
-            String input = s.next();
+            String input = App.s.next();
 
             int inputInt = 0;
             try {
@@ -49,7 +51,7 @@ public class App {
                 case 5:
                     System.out.println("BYE BYE");
                     flag = false;
-                    s.close();
+                    App.s.close();
                     break;
                 default:
                     System.out.println("Not a valid value, Try again!");
@@ -61,8 +63,6 @@ public class App {
 
     // Option  1 - Byte Stream
     public static void option1() {
-        // Create another Scanner for Option 1
-        Scanner s1 = new Scanner(System.in);
         // Flag for the menu
         boolean flag1 = true;
         // String to get the file text
@@ -76,9 +76,16 @@ public class App {
             System.out.println("\t2) Write");
             System.out.println("\t3) Exit");
             System.out.print("INPUT: ");
-            int input = s1.nextInt();
+            String input = App.s.next();
 
-            switch (input) {
+            int inputInt = 0;
+            try {
+                inputInt = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("The input must be a number (Integer)");
+            }
+
+            switch (inputInt) {
                 case 1:
                     try (FileInputStream fin = new FileInputStream("files/input.txt")) {
                         int i;
@@ -111,7 +118,6 @@ public class App {
                 case 3:
                     System.out.println("BYE BYE");
                     flag1 = false;
-                    s1.close();
                     break;
                 default:
                     System.out.println("Not a valid value, Try again!");
@@ -124,8 +130,6 @@ public class App {
 
     // Option  2 - character Stream
     public static void option2() {
-        // Create another Scanner for Option 2
-        Scanner s2 = new Scanner(System.in);
         // Flag for the menu
         boolean flag2 = true;
 
@@ -137,9 +141,16 @@ public class App {
             System.out.println("\t2) Write");
             System.out.println("\t3) Exit");
             System.out.print("INPUT: ");
-            int input = s2.nextInt();
+            String input = App.s.next();
 
-            switch (input) {
+            int inputInt = 0;
+            try {
+                inputInt = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("The input must be a number (Integer)");
+            }
+
+            switch (inputInt) {
                 case 1:
                     System.out.println("READ FILE");
                     break;
@@ -149,7 +160,6 @@ public class App {
                 case 3:
                     System.out.println("BYE BYE");
                     flag2 = false;
-                    s2.close();
                     break;
             }
         }
@@ -158,8 +168,6 @@ public class App {
 
     // Option  3 - buffer Stream
     public static void option3() {
-        // Create another Scanner for Option 3
-        Scanner s3 = new Scanner(System.in);
         // Flag for the menu
         boolean flag3 = true;
 
@@ -171,9 +179,16 @@ public class App {
             System.out.println("\t2) Write");
             System.out.println("\t3) Exit");
             System.out.print("INPUT: ");
-            int input = s3.nextInt();
+            String input = App.s.next();
 
-            switch (input) {
+            int inputInt = 0;
+            try {
+                inputInt = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("The input must be a number (Integer)");
+            }
+
+            switch (inputInt) {
                 case 1:
                     System.out.println("READ FILE");
                     break;
@@ -183,7 +198,6 @@ public class App {
                 case 3:
                     System.out.println("BYE BYE");
                     flag3 = false;
-                    s3.close();
                     break;
             }
         }
@@ -192,8 +206,6 @@ public class App {
 
     // Option  4
     public static void optative() {
-        // Create another Scanner for Option 4
-        Scanner so = new Scanner(System.in);
         // Flag for the menu
         boolean flago = true;
 
@@ -205,9 +217,16 @@ public class App {
             System.out.println("\t2) Write");
             System.out.println("\t3) Exit");
             System.out.print("INPUT: ");
-            int input = so.nextInt();
+            String input = App.s.next();
 
-            switch (input) {
+            int inputInt = 0;
+            try {
+                inputInt = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("The input must be a number (Integer)");
+            }
+
+            switch (inputInt) {
                 case 1:
                     System.out.println("READ FILE");
                     break;
@@ -217,7 +236,6 @@ public class App {
                 case 3:
                     System.out.println("BYE BYE");
                     flago = false;
-                    so.close();
                     break;
             }
         }
