@@ -1,5 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -40,7 +42,7 @@ public class App {
                     App.option1();
                     break;
                 case 2:
-                    // App.option2();
+                    App.option2();
                     break;
                 case 3:
                     // App.option3();
@@ -109,7 +111,7 @@ public class App {
                         try (FileOutputStream fos = new FileOutputStream("files/output_byteStream.txt")) {
                             byte[] bytes = text.getBytes();
                             fos.write(bytes);
-                            System.out.println("Archivo creado exitosamente.");
+                            System.out.println("File created successfully");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -129,9 +131,13 @@ public class App {
     }
 
     // Option  2 - character Stream
-    public static void option2() {
+    public static void option2() throws IOException {
         // Flag for the menu
         boolean flag2 = true;
+        // String variable to store the prettify text
+        String text = "";
+        // Instanciate the writer -> This is for the append option, if it's not defined like this the file will be overwritten
+        FileWriter writer = new FileWriter("files/output_characterStream.txt");
 
         System.out.println("- Read & write File with character Streams -");
         // MENU -
@@ -139,7 +145,8 @@ public class App {
             System.out.println("Select one of these options:");
             System.out.println("\t1) Read");
             System.out.println("\t2) Write");
-            System.out.println("\t3) Exit");
+            System.out.println("\t3) Append");
+            System.out.println("\t4) Exit");
             System.out.print("INPUT: ");
             String input = App.s.next();
 
@@ -152,13 +159,53 @@ public class App {
 
             switch (inputInt) {
                 case 1:
-                    System.out.println("READ FILE");
+                    try {
+                        FileReader reader = new FileReader("files/input.txt");
+                        int data = reader.read();
+
+                        while (data != -1) {
+                            text += (char) data;
+                            data = reader.read();
+                        }
+
+                        reader.close();
+                        text = App.prettifytext(text);
+                        System.out.println(text);
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                     break;
                 case 2:
-                    System.out.println("WRITE FILE");
+                    if (text.equals("")) {
+                        System.out.println("Please first read the file");
+                        break;
+                    } else {
+                        try {
+                            writer.write(text);
+
+                            System.out.println("File created successfully");
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }
                     break;
                 case 3:
+                    System.out.print("Insert the text you want to add to the file: ");
+                    String appendInput = s.next();
+                    appendInput = "\n" + appendInput;
+
+                    try {
+                        writer.append(appendInput);
+
+                        System.out.println("Append successful!");
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+
+                    break;
+                case 4:
                     System.out.println("BYE BYE");
+                    writer.close();
                     flag2 = false;
                     break;
             }
