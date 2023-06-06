@@ -20,4 +20,10 @@ Or just get it from this repository: [JAR file](DB/mysql-connector-j-8.0.33.jar)
 
 We need the `.jar` file because it will be added to the project's Libraries/lib (or something similar depending on IDE) directory.
 
-### Read/Write Files
+### Read/Write Files: [Directory](Files/)
+
+In this repository will be explained 3 ways to read&write files:
+
+-  FileInputStream & FileOutputStream (**byte Stream**)
+-  FileReader & FileWriter (**character Stream**)
+-  BufferedReader & BufferedWriter (**buffered Stream**)
