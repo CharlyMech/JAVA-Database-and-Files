@@ -2,6 +2,13 @@
 
 As the main README file says, this repository will only explain the following read&write methods.
 
+#### Some useful videos
+
+-  Bro Code: [FileReader](https://www.youtube.com/watch?v=Hr8tLlj32BQ&ab_channel=BroCode) & [FileWriter](https://www.youtube.com/watch?v=kjzmaJPoaNc&ab_channel=BroCode)
+-  Keep On Coding: [Java File I/O (Reading & Writing)](https://www.youtube.com/watch?v=hgF21imQ_Is&ab_channel=KeepOnCoding)
+
+This is not a topic related video for the exam, but I find this could be useful in the future: [Java - Using a config file](https://www.youtube.com/watch?v=6y5vzp2qYik&ab_channel=TechMeNow2015)
+
 ## Byte Stream
 
 -  FileInputStream (**read**): `new FileInputStream("file_path");`
